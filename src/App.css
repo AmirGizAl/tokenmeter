@@ -1,0 +1,476 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Сброс базовых стилей */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Глобальные переменные */
+:root {
+  --primary-color: #22a2d7;         /* Синий */
+  --secondary-color: #8A2BE2;         /* Фиолетовый */
+  --white: #FFFFFF;
+  --light-gray: #c6c6c6;
+  --dark-gray-title: #2C2C2E;
+  --dark-gray-text: #3A3A3C;
+  --font-family: 'Russo One', sans-serif;
+  --dark-blue: linear-gradient(to right, #031425, #061d32);  /* Новый цвет: тёмно-синий */
+}
+
+/* Глобальные стили */
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-family);
+}
+
+body {
+  background: var(--dark-blue);
+  color: var(--dark-gray-text);
+  line-height: 1.6;
+}
+
+/* Обёртка для всего приложения – растягивается на всю ширину и центрирует контент */
+.app-wrapper {
+  background: var(--dark-blue);
+  width: 100%;
+}
+
+/* 1. Header */
+.header {
+  background-color: var(--dark-blue);
+  padding: 0.5rem 2rem;
+  border-bottom: 10px solid var(--primary-color);
+  border-radius: 0 0 30px 30px; /* Верхние углы: 0, нижние углы: 20px */
+  overflow: hidden;         /* Чтобы содержимое не выходило за округление */
+
+}
+
+.header-inner {
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Блок с логотипом и названием */
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 90px;
+  height: auto;
+}
+
+.project-name {
+  margin-left: 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 0.1;
+  color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .logo {
+    width: 65px;
+    height: auto;
+  }
+
+  .project-name {
+    font-size: 1.2rem;
+  }
+}
+
+/* Меню навигации */
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-menu a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.1s;
+}
+
+.nav-menu a:hover {
+  color: var(--primary-color);
+}
+
+/* Стили для гамбургера и мобильного меню */
+.hamburger {
+  display: none; /* по умолчанию скрыт */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--dark-gray-text);
+  border-radius: 2px;
+  margin: 2px 0;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  /* Мобильное меню – позиционируем его абсолютно относительно контейнера header-inner */
+  .nav-menu {
+    position: absolute;
+    top: 8.5%;           /* Начинается сразу после header-inner */
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    flex-direction: column;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    overflow: hidden;
+    max-height: 0;       /* Скрыто по умолчанию */
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    z-index: 10;
+    gap: 0;
+  }
+  /* Открытое состояние – при добавлении класса open */
+  .nav-menu.open {
+    max-height: 300px;   /* Значение должно быть достаточно для всех пунктов меню */
+    opacity: 1;
+  }
+  /* Пункты меню – растягиваются на всю ширину меню */
+  .nav-menu a {
+    display: block;
+    padding: 0.5rem 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-size: 1.3rem;
+  }
+  /* Гамбургер — он должен отображаться на мобильных */
+  .hamburger {
+    display: flex;
+  }
+  /* Когда меню открыто, добавляем класс "open" для гамбургера, чтобы изменить стили его линий */
+  .hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+}
+
+
+/* 2. Hero-блок */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 85vh; /* уменьшенная высота (примерно 2/3 от 100vh) */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Overlay с прозрачностью 30% для улучшения читаемости */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+/* Контейнер с текстом и кнопкой внутри hero */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Заголовок – увеличен в 3 раза */
+.hero-content h1 {
+  color: var(--white);
+  font-weight: bold;
+  font-size: 70px; /* исходное значение для десктопа */
+  margin-bottom: 5rem; /* Увеличиваем отступ между заголовком и кнопкой */
+}
+
+/* На мобильных устройствах – 3 раза от 24px */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 30px;
+    margin-top: 70px;
+  }
+}
+
+/* CTA-кнопка – увеличена в 2 раза */
+.cta-button {
+  background: var(--white);
+  border: none;
+  border-radius: 20px;
+  padding: 1.5rem 2.5rem;  /* увеличение отступов */
+  color: var(--primary-color);
+  font-size: 1.3rem;  /* 2 * базовый размер (1rem) */
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .cta-button {
+    padding: 1.5rem 1.5rem;  /* увеличение отступов */
+    font-size: 0.75rem;  /* 2 * базовый размер (1rem) */
+  }
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  filter: brightness(90%);
+}
+
+/* Сетка для карточек */
+.hero-cards {
+  display: flex;
+  flex-wrap: wrap;         /* Позволяет карточкам переноситься на новую строку при узком экране */
+  gap: 2rem;               /* Расстояние между карточками */
+  margin-top: 10rem;        /* Отступ сверху, чтобы карточки были ниже кнопки */
+  margin-bottom: -10rem;
+  justify-content: center; /* Выравниваем карточки по центру */
+}
+
+.hero-card {
+  background: var(--dark-blue);                /* Белый фон для контраста */
+  border-radius: 8px;                 /* Скругленные углы */
+  padding: 1rem;                      /* Внутренние отступы */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Лёгкая тень */
+  flex: 1 1 260px;                    /* Позволяет карточке сжиматься до 220px */
+  max-width: 300px;                   /* Максимальная ширина карточки */
+  display: flex;                      /* Гибкое расположение элементов внутри */
+  flex-direction: row;                /* Иконка будет слева, текст справа */
+  align-items: center;                /* Выравнивание по центру по вертикали */
+  gap: 0.8rem;                        /* Отступ между иконкой и текстовым блоком */
+  border: 2px solid var(--primary-color);
+}
+
+/* Блок с иконкой в карточке */
+.hero-card-icon {
+  text-align: left;
+}
+
+.hero-card-icon img {
+  width: 60px;
+  height: 60px;
+}
+
+/* Заголовок карточки */
+.hero-card-title {
+  font-size: 0.88rem;
+  color: var(--white);  /* Тёмно-серый */
+  text-align: left;
+}
+
+/* Текст внутри карточки */
+.hero-card-text {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700; /* Обратите внимание, что допустимые значения: 100, 200, 300, 400, и т.д. */
+  font-size: 0.7rem;
+  color: var(--light-gray);  /* Чуть более светлый тёмно-серый */
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+  .hero-cards {
+    gap: 1rem;               /* Расстояние между карточками */
+    margin-top: 10rem;        /* Отступ сверху, чтобы карточки были ниже кнопки */
+    margin-bottom: 0.1rem;
+  }
+  .hero-card {
+    gap: 1rem;                        /* Отступ между иконкой и текстовым блоком */
+    flex-direction: row;  /* Если нужно оставить иконку слева, можно сохранить row */
+  }
+  .hero-card-text-block {
+    text-align: left;     /* Или text-align: center; если требуется */
+  }
+}
+
+/* Ключевые кадры для эффекта fadeIn */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Класс, который применяет анимацию */
+.fade-in {
+  opacity: 0; /* начальное состояние */
+  animation: fadeIn 1s ease-out forwards;
+}
+
+/* Если нужен вариант с задержкой для отдельных элементов (например, для последовательного появления) */
+.fade-in-delay {
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+/* 3. Блок "О проекте" */
+.about {
+  width: 97%;
+  margin: 0 auto;
+  background-color: var(--dark-blue);
+  padding: 3rem 2rem;
+  text-align: center;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 10px solid var(--primary-color);
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-text {
+  flex: 1 1 300px;
+  text-align: left;
+}
+
+.about-text h2 {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .about-text h2 {
+    font-size: 20px;
+  }
+}
+
+.about-text p {
+  font-size: 16px;
+  color: var(--light-gray);
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700; /* Обратите внимание, что допустимые значения: 100, 200, 300, 400, и т.д. */
+}
+
+.about-visual {
+  flex: 1 1 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.about-visual img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Блок "Как это работает?" */
+.how-it-works {
+  padding: 3rem 2rem;
+  text-align: center;
+  background-color: var(--dark-blue); /* Если нужен фон, можно его изменить */
+}
+
+.how-it-works h2 {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  color: var(--white, #2C2C2E);
+}
+
+.steps-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.step {
+  flex: 1 1 250px;
+  max-width: 300px;
+  text-align: center;
+}
+
+.step-icon {
+  margin-bottom: 1rem;
+}
+
+.step p {
+  font-size: 16px;
+  color: var(--white, #3A3A3C);
+  line-height: 1.4;
+}
+
+/* 5. Футер */
+.footer {
+  background-color: var(--white);
+  padding: 1rem;
+  border-top: 0 solid #eaeaea;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-logo-img {
+  width: 100px;
+  height: auto;
+}
+
+.footer-copy {
+  flex: 1;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--dark-gray-text);
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-social a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
