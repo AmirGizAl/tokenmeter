@@ -18,7 +18,7 @@ const App: React.FC = () => {
             <header className="header">
                 <div className="header-inner">
                     <div className="logo-container">
-                        {/*<img src={logo} alt="TokenMeter Logo" className="logo"/>*/}
+                        <img src={logo} alt="TokenMeter Logo" className="logo"/>
                         <span className="project-name">TokenMeter</span>
                     </div>
                     <nav className={`nav-menu ${isNavOpen ? 'open' : ''}`} >
