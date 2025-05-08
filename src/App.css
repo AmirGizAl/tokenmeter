@@ -44,7 +44,7 @@ body {
 .header {
   background-color: var(--dark-blue);
   padding: 0.5rem 2rem;
-  border-bottom: 10px solid var(--primary-color);
+  border-bottom: 5px solid var(--primary-color);
   border-radius: 0 0 30px 30px; /* Верхние углы: 0, нижние углы: 20px */
   overflow: hidden;         /* Чтобы содержимое не выходило за округление */
 
@@ -204,9 +204,9 @@ body {
 .hero-content {
   position: relative;
   z-index: 2;
-  padding: 2rem;
+  padding: 4rem;
   text-align: center;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -215,14 +215,19 @@ body {
   color: var(--white);
   font-weight: bold;
   font-size: 70px; /* исходное значение для десктопа */
-  margin-bottom: 5rem; /* Увеличиваем отступ между заголовком и кнопкой */
+  max-width: 1000px;   /* ширина блока h1 не превышает 800 px  */
+  width: 100%;       /* можно оставить 100 %, чтобы меньше 800 px сжималось */
+  margin: 10rem auto 5rem;
 }
 
 /* На мобильных устройствах – 3 раза от 24px */
 @media (max-width: 768px) {
+  .hero-content {
+    padding: 0.1rem;
+  }
   .hero-content h1 {
     font-size: 30px;
-    margin-top: 70px;
+    margin: 5rem auto 5rem;
   }
 }
 
@@ -241,8 +246,8 @@ body {
 
 @media (max-width: 768px) {
   .cta-button {
-    padding: 1.5rem 1.5rem;  /* увеличение отступов */
-    font-size: 0.75rem;  /* 2 * базовый размер (1rem) */
+    padding: 1rem 1rem;  /* увеличение отступов */
+    font-size: 0.9rem;  /* 2 * базовый размер (1rem) */
   }
 }
 
@@ -251,70 +256,56 @@ body {
   filter: brightness(90%);
 }
 
-/* Сетка для карточек */
-.hero-cards {
+/* Карточка вокруг блока "Как это работает?" */
+.hero-how {
+  width: 100%;
+  margin-bottom: -5px;  /* сдвигает карточку к нижнему краю hero */
+  margin-top: 300px;
+}
+
+.how-card {
+  background: var(--dark-blue);
+  border: 5px solid var(--primary-color);
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  padding: 2rem;
+  max-width: 80%;
+  margin: 0 auto; /* Центрируем внутри hero‑контента */
+}
+
+.steps-container {
   display: flex;
-  flex-wrap: wrap;         /* Позволяет карточкам переноситься на новую строку при узком экране */
-  gap: 2rem;               /* Расстояние между карточками */
-  margin-top: 10rem;        /* Отступ сверху, чтобы карточки были ниже кнопки */
-  margin-bottom: -10rem;
-  justify-content: center; /* Выравниваем карточки по центру */
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
 }
 
-.hero-card {
-  background: var(--dark-blue);                /* Белый фон для контраста */
-  border-radius: 8px;                 /* Скругленные углы */
-  padding: 1rem;                      /* Внутренние отступы */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Лёгкая тень */
-  flex: 1 1 260px;                    /* Позволяет карточке сжиматься до 220px */
-  max-width: 300px;                   /* Максимальная ширина карточки */
-  display: flex;                      /* Гибкое расположение элементов внутри */
-  flex-direction: row;                /* Иконка будет слева, текст справа */
-  align-items: center;                /* Выравнивание по центру по вертикали */
-  gap: 0.8rem;                        /* Отступ между иконкой и текстовым блоком */
-  border: 2px solid var(--primary-color);
+.step {
+  flex: 1 1 220px;
+  max-width: 560px;
+  text-align: center;
+  color: var(--white);
 }
 
-/* Блок с иконкой в карточке */
-.hero-card-icon {
-  text-align: left;
+.step-icon {
 }
 
-.hero-card-icon img {
-  width: 60px;
-  height: 60px;
-}
-
-/* Заголовок карточки */
-.hero-card-title {
-  font-size: 0.88rem;
-  color: var(--white);  /* Тёмно-серый */
-  text-align: left;
-}
-
-/* Текст внутри карточки */
-.hero-card-text {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 700; /* Обратите внимание, что допустимые значения: 100, 200, 300, 400, и т.д. */
-  font-size: 0.7rem;
-  color: var(--light-gray);  /* Чуть более светлый тёмно-серый */
-  line-height: 1.2;
-  text-align: left;
-}
-
-/* Адаптивность для мобильных */
-@media (max-width: 768px) {
-  .hero-cards {
-    gap: 1rem;               /* Расстояние между карточками */
-    margin-top: 10rem;        /* Отступ сверху, чтобы карточки были ниже кнопки */
-    margin-bottom: 0.1rem;
+/* На мобильных — столбиком */
+@media (max-width: 600px) {
+  .hero-how {
+    width: 100%;
+    margin: 10rem auto 5rem;
   }
-  .hero-card {
-    gap: 1rem;                        /* Отступ между иконкой и текстовым блоком */
-    flex-direction: row;  /* Если нужно оставить иконку слева, можно сохранить row */
+  .how-card {
+    margin: 0 auto; /* Центрируем внутри hero‑контента */
+    padding: 1rem;
   }
-  .hero-card-text-block {
-    text-align: left;     /* Или text-align: center; если требуется */
+  .steps-container {
+    gap: 0.5rem;
+    flex-direction: column;
+  }
+  .step-icon {
+    margin-top: -8rem
   }
 }
 
@@ -352,7 +343,7 @@ body {
   text-align: center;
   border-radius: 30px;
   overflow: hidden;
-  border: 10px solid var(--primary-color);
+  border: 5px solid var(--primary-color);
 }
 
 .about-content {
@@ -401,41 +392,71 @@ body {
   height: auto;
 }
 
-/* Блок "Как это работает?" */
-.how-it-works {
-  padding: 3rem 2rem;
-  text-align: center;
-  background-color: var(--dark-blue); /* Если нужен фон, можно его изменить */
-}
-
-.how-it-works h2 {
-  font-size: 28px;
-  font-weight: 500;
-  margin-bottom: 2rem;
-  color: var(--white, #2C2C2E);
-}
-
-.steps-container {
+/* Сетка для карточек */
+.cards {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
+  flex-wrap: wrap;         /* Позволяет карточкам переноситься на новую строку при узком экране */
+  gap: 3rem;               /* Расстояние между карточками */
+  margin-top: 2rem;        /* Отступ сверху, чтобы карточки были ниже кнопки */
+  margin-bottom: 10rem;
+  justify-content: center; /* Выравниваем карточки по центру */
 }
 
-.step {
-  flex: 1 1 250px;
-  max-width: 300px;
-  text-align: center;
+.card {
+  background: var(--dark-blue);                /* Белый фон для контраста */
+  border-radius: 8px;                 /* Скругленные углы */
+  padding: 1rem;                      /* Внутренние отступы */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Лёгкая тень */
+  flex: 1 1 260px;                    /* Позволяет карточке сжиматься до 220px */
+  max-width: 330px;                   /* Максимальная ширина карточки */
+  display: flex;                      /* Гибкое расположение элементов внутри */
+  flex-direction: row;                /* Иконка будет слева, текст справа */
+  align-items: center;                /* Выравнивание по центру по вертикали */
+  gap: 0.8rem;                        /* Отступ между иконкой и текстовым блоком */
+  border: 2px solid var(--primary-color);
 }
 
-.step-icon {
-  margin-bottom: 1rem;
+/* Блок с иконкой в карточке */
+.card-icon {
+  text-align: left;
 }
 
-.step p {
-  font-size: 16px;
-  color: var(--white, #3A3A3C);
-  line-height: 1.4;
+.card-icon img {
+  width: 60px;
+  height: 60px;
+}
+
+/* Заголовок карточки */
+.card-title {
+  font-size: 0.88rem;
+  color: var(--white);  /* Тёмно-серый */
+  text-align: left;
+}
+
+/* Текст внутри карточки */
+.card-text {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700; /* Обратите внимание, что допустимые значения: 100, 200, 300, 400, и т.д. */
+  font-size: 0.7rem;
+  color: var(--light-gray);  /* Чуть более светлый тёмно-серый */
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+  .cards {
+    gap: 1rem;               /* Расстояние между карточками */
+    margin-top: 10rem;        /* Отступ сверху, чтобы карточки были ниже кнопки */
+    margin-bottom: 0.1rem;
+  }
+  .card {
+    gap: 1rem;                        /* Отступ между иконкой и текстовым блоком */
+    flex-direction: row;  /* Если нужно оставить иконку слева, можно сохранить row */
+  }
+  .card-text-block {
+    text-align: left;     /* Или text-align: center; если требуется */
+  }
 }
 
 /* 5. Футер */

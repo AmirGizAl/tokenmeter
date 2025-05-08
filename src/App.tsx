@@ -50,51 +50,47 @@ const App: React.FC = () => {
                     >
                         Открыть TokenMeter в Телеграм
                     </a>
-
-                    {/* Новый блок с карточками под кнопкой */}
-                    <div className="hero-cards fade-in" data-speed="0.3">
-                        <div className="hero-card">
-                            <div className="hero-card-icon">
-                                {/* Подставьте свою иконку (svg или <img>) */}
-                                <img src={icon_1} alt="Иконка 1"/>
-                            </div>
-                            <div className="hero-card-text-block">
-                                <h3 className="hero-card-title">Высокая доходность</h3>
-                                <p className="hero-card-text">Рост цены свыше 35%*</p>
-                            </div>
-                        </div>
-
-                        <div className="hero-card">
-                            <div className="hero-card-icon">
-                                <img src={icon_4} alt="Иконка 2"/>
-                            </div>
-                            <div className="hero-card-text-block">
-                                <h3 className="hero-card-title">Низкий порог входа</h3>
-                                <p className="hero-card-text">Купите токен на любую сумму</p>
-                            </div>
-                        </div>
-
-                        <div className="hero-card">
-                            <div className="hero-card-icon">
-                                <img src={icon_3} alt="Иконка 3"/>
-                            </div>
-                            <div className="hero-card-text-block">
-                                <h3 className="hero-card-title">Недвижимость по всему миру</h3>
-                                <p className="hero-card-text">
-                                    Покупайте и продавайте цифровые квадратные метры по всему миру
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="hero-card">
-                            <div className="hero-card-icon">
-                                <img src={icon_2} alt="Иконка 4"/>
-                            </div>
-                            <div className="hero-card-text-block">
-                                <h3 className="hero-card-title">Доступность покупки</h3>
-                                <p className="hero-card-text">
-                                    Не нужно иметь гражданство страны, чтобы инвестировать в ее недвижимость
-                                </p>
+                    {/* Новый блок с карточками Как это работает */}
+                    <div className="hero-how fade-in" data-speed="0.3">
+                        <div className="how-card">
+                            <div className="steps-container">
+                                <div className="step-icon">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22A2D7"
+                                         strokeWidth="2"
+                                         strokeLinecap="round" strokeLinejoin="round">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    </svg>
+                                </div>
+                                <div className="step">
+                                    <p>Приобретайте цифровые метры через Телеграм‑бот.</p>
+                                </div>
+                                <div className="step-icon">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22A2D7"
+                                         strokeWidth="2"
+                                         strokeLinecap="round" strokeLinejoin="round">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    </svg>
+                                </div>
+                                <div className="step">
+                                    <p>Стоимость токенов привязана к реальной недвижимости.</p>
+                                </div>
+                                <div className="step-icon">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22A2D7"
+                                         strokeWidth="2"
+                                         strokeLinecap="round" strokeLinejoin="round">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    </svg>
+                                </div>
+                                <div className="step">
+                                    <p>Получайте прибыль при росте стоимости квадратных метров.</p>
+                                </div>
+                                <div className="step-icon">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22A2D7"
+                                         strokeWidth="2"
+                                         strokeLinecap="round" strokeLinejoin="round">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -106,7 +102,8 @@ const App: React.FC = () => {
                     <div className="about-text">
                         <h2>Что такое цифровой квадратный метр?</h2>
                         <p>
-                            Это цифровой финансовый актив или токен, цена которого твердо привязана к стоимости реального
+                            Это цифровой финансовый актив или токен, цена которого твердо привязана к стоимости
+                            реального
                             квадратного метра недвижимости в ведущих городах мира. Стоимость токена меняется вместе с
                             ценой квадратного метра на каждом этапе строительства проекта.
                         </p>
@@ -116,37 +113,47 @@ const App: React.FC = () => {
                     </div>
                 </div>
             </section>
-            {/* Блок "Как это работает" */}
-            <section className="how-it-works" id="how">
-                <h2>Как это работает?</h2>
-                <div className="steps-container">
-                    <div className="step">
-                        <div className="step-icon">
-                            {/* Пример SVG-иконки, замените на свои иконки при необходимости */}
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22A2D7" strokeWidth="2"
-                                 strokeLinecap="round" strokeLinejoin="round">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            </svg>
-                        </div>
-                        <p>Приобретайте цифровые метры через Телеграм-бот.</p>
+            {/* Блок "Карточки" */}
+            <section className="cards" data-speed="0.3">
+                <div className="card">
+                    <div className="card-icon">
+                        {/* Подставьте свою иконку (svg или <img>) */}
+                        <img src={icon_1} alt="Иконка 1"/>
                     </div>
-                    <div className="step">
-                        <div className="step-icon">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22A2D7" strokeWidth="2"
-                                 strokeLinecap="round" strokeLinejoin="round">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            </svg>
-                        </div>
-                        <p>Стоимость токенов привязана к реальной недвижимости.</p>
+                    <div className="card-text-block">
+                        <h3 className="card-title">Высокая доходность</h3>
+                        <p className="card-text">Рост цены свыше 35%*</p>
                     </div>
-                    <div className="step">
-                        <div className="step-icon">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22A2D7" strokeWidth="2"
-                                 strokeLinecap="round" strokeLinejoin="round">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            </svg>
-                        </div>
-                        <p>Получайте прибыль при росте стоимости квадратных метров.</p>
+                </div>
+                <div className="card">
+                    <div className="card-icon">
+                        <img src={icon_4} alt="Иконка 2"/>
+                    </div>
+                    <div className="card-text-block">
+                        <h3 className="card-title">Низкий порог входа</h3>
+                        <p className="card-text">Купите токен на любую сумму</p>
+                    </div>
+                </div>
+                <div className="card">
+                    <div className="card-icon">
+                        <img src={icon_3} alt="Иконка 3"/>
+                    </div>
+                    <div className="card-text-block">
+                        <h3 className="card-title">Недвижимость по всему миру</h3>
+                        <p className="card-text">
+                            Покупайте и продавайте цифровые квадратные метры по всему миру
+                        </p>
+                    </div>
+                </div>
+                <div className="card">
+                    <div className="card-icon">
+                        <img src={icon_2} alt="Иконка 4"/>
+                    </div>
+                    <div className="card-text-block">
+                        <h3 className="card-title">Доступность покупки</h3>
+                        <p className="card-text">
+                            Не нужно иметь гражданство страны, чтобы инвестировать в ее недвижимость
+                        </p>
                     </div>
                 </div>
             </section>
