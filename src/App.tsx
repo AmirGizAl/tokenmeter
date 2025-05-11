@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import './App.css';
+import CoinLottie from './components/CoinLottie.tsx';
+
 import logo from './assets/logo.png';           // Логотип TokenMeter
 import heroBg from './assets/hero_bg.png';        // Фоновое изображение для Hero-блока
-import infographic from './assets/logo_no_background.png';// Placeholder для инфографики
 import icon_1 from './assets/icon_coin_1.png';
 import icon_2 from './assets/icon_coin_2.png';
 import icon_3 from './assets/icon_coin_3.png';
 import icon_4 from './assets/icon_coin_4.png';
+import TgLogo from './assets/tg_logo.svg?react';
+import XLogo from './assets/x_logo.svg?react';
+import DisLogo from './assets/dis_logo.svg?react';
 
 const App: React.FC = () => {
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -21,10 +25,16 @@ const App: React.FC = () => {
                         <img src={logo} alt="TokenMeter Logo" className="logo"/>
                         <span className="project-name">TokenMeter</span>
                     </div>
-                    <nav className={`nav-menu ${isNavOpen ? 'open' : ''}`} >
-                        <a href="#hero">Главная</a>
-                        <a href="#about">О проекте</a>
-                        <a href="#contacts">Контакты</a>
+                    <nav className={`nav-menu ${isNavOpen ? 'open' : ''}`}>
+                        <a href="#" aria-label="Telegram">
+                            <TgLogo className="nav-icon"/>
+                        </a>
+                        <a href="#" aria-label="X">
+                            <XLogo className="nav-icon"/>
+                        </a>
+                        <a href="#" aria-label="Discord">
+                            <DisLogo className="nav-icon"/>
+                        </a>
                     </nav>
                     <div className={`hamburger ${isNavOpen ? "open" : ""}`} onClick={toggleNav}>
                         <span></span>
@@ -50,48 +60,37 @@ const App: React.FC = () => {
                     >
                         Открыть TokenMeter в Телеграм
                     </a>
-                    {/* Новый блок с карточками Как это работает */}
-                    <div className="hero-how fade-in" data-speed="0.3">
-                        <div className="how-card">
-                            <div className="steps-container">
-                                <div className="step-icon">
-                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22A2D7"
-                                         strokeWidth="2"
-                                         strokeLinecap="round" strokeLinejoin="round">
-                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                    </svg>
-                                </div>
-                                <div className="step">
-                                    <p>Приобретайте цифровые метры через Телеграм‑бот.</p>
-                                </div>
-                                <div className="step-icon">
-                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22A2D7"
-                                         strokeWidth="2"
-                                         strokeLinecap="round" strokeLinejoin="round">
-                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                    </svg>
-                                </div>
-                                <div className="step">
-                                    <p>Стоимость токенов привязана к реальной недвижимости.</p>
-                                </div>
-                                <div className="step-icon">
-                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22A2D7"
-                                         strokeWidth="2"
-                                         strokeLinecap="round" strokeLinejoin="round">
-                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                    </svg>
-                                </div>
-                                <div className="step">
-                                    <p>Получайте прибыль при росте стоимости квадратных метров.</p>
-                                </div>
-                                <div className="step-icon">
-                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22A2D7"
-                                         strokeWidth="2"
-                                         strokeLinecap="round" strokeLinejoin="round">
-                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                    </svg>
-                                </div>
-                            </div>
+                    {/* Бегущая строка под кнопкой hero */}
+                    <div className="news-ticker fade-in" data-speed="0.3">
+                        <div className="ticker-track">
+                            {/* дублируем набор, чтобы получилась бесшовная лента */}
+                            {[1, 2].map((dup) => (
+                                <React.Fragment key={dup}>
+                                    <div className="ticker-item">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22A2D7"
+                                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                        </svg>
+                                        <span>Приобретайте цифровые метры через Телеграм-бот</span>
+                                    </div>
+
+                                    <div className="ticker-item">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22A2D7"
+                                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                        </svg>
+                                        <span>Стоимость токенов привязана к реальной недвижимости</span>
+                                    </div>
+
+                                    <div className="ticker-item">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22A2D7"
+                                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                        </svg>
+                                        <span>Получайте прибыль при росте стоимости квадратных метров</span>
+                                    </div>
+                                </React.Fragment>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -109,15 +108,14 @@ const App: React.FC = () => {
                         </p>
                     </div>
                     <div className="about-visual">
-                        <img src={infographic} alt="Инфографика"/>
+                        <CoinLottie />
                     </div>
                 </div>
             </section>
             {/* Блок "Карточки" */}
-            <section className="cards" data-speed="0.3">
+            <section className="cards">
                 <div className="card">
                     <div className="card-icon">
-                        {/* Подставьте свою иконку (svg или <img>) */}
                         <img src={icon_1} alt="Иконка 1"/>
                     </div>
                     <div className="card-text-block">

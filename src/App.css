@@ -92,18 +92,14 @@ body {
 /* Меню навигации */
 .nav-menu {
   display: flex;
-  gap: 2rem;
+  margin-bottom: -0.7rem;
 }
 
-.nav-menu a {
-  color: var(--white);
-  text-decoration: none;
-  font-size: 1.1rem;
-  transition: color 0.1s;
-}
-
-.nav-menu a:hover {
-  color: var(--primary-color);
+.nav-icon {
+  width: 80px;
+  height: 30px;
+  fill: currentColor;        /* наследует цвет ссылки */
+  transition: fill 0.2s;
 }
 
 /* Стили для гамбургера и мобильного меню */
@@ -120,43 +116,56 @@ body {
   display: block;
   width: 100%;
   height: 3px;
-  background-color: var(--dark-gray-text);
+  background-color: var(--primary-color);
   border-radius: 2px;
   margin: 2px 0;
   transition: all 0.3s ease;
 }
 
 @media (max-width: 768px) {
-  /* Мобильное меню – позиционируем его абсолютно относительно контейнера header-inner */
+  /* Блок навигации позиционируем так же, но теперь строим его в РЯД                */
   .nav-menu {
     position: absolute;
-    top: 8.5%;           /* Начинается сразу после header-inner */
+    top: 8.6%;                 /* остаётся под хэдером */
     left: 0;
     width: 100%;
-    background-color: var(--white);
-    flex-direction: column;
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 30px;
+    background: var(--dark-blue);
+    border-top: 1px solid rgba(0,0,0,.2);
+    border-radius: 20px;
+    /* --- ключевые изменения --- */
+    display: flex;             /* был column --> теперь flex-row */
+    flex-direction: row;       /* горизонтально                       */
+    justify-content: space-around; /* равномерно распределяем ссылки  */
+    align-items: center;
+    gap: 0;                    /* пробелы между ссылками зададим padding’ом */
+    max-height: 0;             /* свёрнуто по умолчанию                */
     overflow: hidden;
-    max-height: 0;       /* Скрыто по умолчанию */
-    transition: max-height 0.4s ease, opacity 0.4s ease;
     opacity: 0;
+    transition: max-height .4s ease, opacity .4s ease;
     z-index: 10;
-    gap: 0;
+    padding: 0;                /* убрали внутренние отступы            */
   }
-  /* Открытое состояние – при добавлении класса open */
+
+  /* При открытии высоту делаем фиксированной, чтобы анимация работала */
   .nav-menu.open {
-    max-height: 300px;   /* Значение должно быть достаточно для всех пунктов меню */
+    max-height: 80px;          /* достаточно, чтобы в один ряд поместились */
     opacity: 1;
   }
-  /* Пункты меню – растягиваются на всю ширину меню */
+
+  /* Ссылки теперь не блочные, а инлайн-flex – выравнивание по центру   */
   .nav-menu a {
-    display: block;
-    padding: 0.5rem 0.5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    text-align: center;
-    font-size: 1.3rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.25rem;  /* горизонтальный внутренний отступ   */
+    border: none;              /* убираем вертикальные разделители   */
+    font-size: 1.2rem;
   }
+
+  /* Опционально: тонкая линия-делитель между пунктами                   */
+  .nav-menu a:not(:last-child) {
+    border-right: 1px solid rgba(0,0,0,.15);
+  }
+
   /* Гамбургер — он должен отображаться на мобильных */
   .hamburger {
     display: flex;
@@ -178,7 +187,7 @@ body {
 .hero {
   position: relative;
   width: 100%;
-  min-height: 85vh; /* уменьшенная высота (примерно 2/3 от 100vh) */
+  min-height: 90vh; /* уменьшенная высота (примерно 2/3 от 100vh) */
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -204,7 +213,6 @@ body {
 .hero-content {
   position: relative;
   z-index: 2;
-  padding: 4rem;
   text-align: center;
   max-width: 100%;
   margin: 0 auto;
@@ -217,17 +225,20 @@ body {
   font-size: 70px; /* исходное значение для десктопа */
   max-width: 1000px;   /* ширина блока h1 не превышает 800 px  */
   width: 100%;       /* можно оставить 100 %, чтобы меньше 800 px сжималось */
-  margin: 10rem auto 5rem;
+  margin: 5rem auto 5rem;
 }
 
 /* На мобильных устройствах – 3 раза от 24px */
 @media (max-width: 768px) {
+  .hero {
+    min-height: 60vh; /* уменьшенная высота (примерно 2/3 от 100vh) */
+  }
   .hero-content {
     padding: 0.1rem;
   }
   .hero-content h1 {
     font-size: 30px;
-    margin: 5rem auto 5rem;
+    margin: -5rem auto 5rem;
   }
 }
 
@@ -256,56 +267,50 @@ body {
   filter: brightness(90%);
 }
 
-/* Карточка вокруг блока "Как это работает?" */
-.hero-how {
+/* Контейнер новостной строки */
+.news-ticker {
   width: 100%;
-  margin-bottom: -5px;  /* сдвигает карточку к нижнему краю hero */
-  margin-top: 300px;
+  overflow: hidden;
+  margin: 20rem 0 -2rem;
 }
 
-.how-card {
-  background: var(--dark-blue);
-  border: 5px solid var(--primary-color);
-  border-radius: 30px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.1);
-  padding: 2rem;
-  max-width: 80%;
-  margin: 0 auto; /* Центрируем внутри hero‑контента */
-}
-
-.steps-container {
-  display: flex;
-  flex-wrap: wrap;
+/* Лента, которая непрерывно движется */
+.ticker-track {
+  display: inline-flex;
+  animation: ticker 25s linear infinite; /* скорость ≈ 25 c – подстройте */
+  white-space: nowrap;
   gap: 1rem;
-  justify-content: center;
 }
 
-.step {
-  flex: 1 1 220px;
-  max-width: 560px;
-  text-align: center;
+/* Каждый пункт: иконка + текст */
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.5rem;
   color: var(--white);
 }
 
-.step-icon {
+.ticker-item svg {
+  margin-right: 1rem;
 }
 
-/* На мобильных — столбиком */
-@media (max-width: 600px) {
-  .hero-how {
-    width: 100%;
-    margin: 10rem auto 5rem;
+/* Анимация движения: влево на 50 % ширины трека */
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Для светлого фона (если внутри .how-card) можно перекрасить текст */
+.how-card .ticker-item {
+  color: var(--dark-gray-text);
+}
+
+@media (max-width: 768px) {
+  .news-ticker {
+    margin: 10rem 0 -5rem;
   }
-  .how-card {
-    margin: 0 auto; /* Центрируем внутри hero‑контента */
-    padding: 1rem;
-  }
-  .steps-container {
-    gap: 0.5rem;
-    flex-direction: column;
-  }
-  .step-icon {
-    margin-top: -8rem
+  .ticker-item {
+    font-size: 1.1rem;
   }
 }
 
@@ -387,9 +392,14 @@ body {
   justify-content: center;
 }
 
-.about-visual img {
-  max-width: 100%;
-  height: auto;
+.hero-lottie {
+  /*position: absolute;*/
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;   /* клики проходят сквозь */
+  z-index: 0;
 }
 
 /* Сетка для карточек */
