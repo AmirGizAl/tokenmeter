@@ -251,8 +251,9 @@ body {
   color: var(--primary-color);
   font-size: 1.3rem;  /* 2 * базовый размер (1rem) */
   text-decoration: none;
-  transition: transform 0.2s, background 0.2s;
+  transition: transform 0.2s;
   cursor: pointer;
+  display: inline-block;
 }
 
 @media (max-width: 768px) {
@@ -371,6 +372,9 @@ body {
   font-weight: 500;
   color: var(--white);
   margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .6s ease-out, transform .6s ease-out;
 }
 
 @media (max-width: 768px) {
@@ -384,6 +388,22 @@ body {
   color: var(--light-gray);
   font-family: 'Open Sans', sans-serif;
   font-weight: 700; /* Обратите внимание, что допустимые значения: 100, 200, 300, 400, и т.д. */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .6s ease-out, transform .6s ease-out;
+}
+
+/* Когда .about получает класс visible: */
+.about.visible .about-text h2 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .1s;       /* появляется первым */
+}
+
+.about.visible .about-text p {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .4s;       /* небольшая пауза (0.3 с) */
 }
 
 .about-visual {
@@ -414,17 +434,30 @@ body {
 
 .card {
   background: var(--dark-blue);                /* Белый фон для контраста */
-  border-radius: 8px;                 /* Скругленные углы */
+  border-radius: 30px;                 /* Скругленные углы */
   padding: 1rem;                      /* Внутренние отступы */
   box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Лёгкая тень */
   flex: 1 1 260px;                    /* Позволяет карточке сжиматься до 220px */
-  max-width: 330px;                   /* Максимальная ширина карточки */
+  max-width: 400px;                   /* Максимальная ширина карточки */
   display: flex;                      /* Гибкое расположение элементов внутри */
   flex-direction: row;                /* Иконка будет слева, текст справа */
   align-items: center;                /* Выравнивание по центру по вертикали */
   gap: 0.8rem;                        /* Отступ между иконкой и текстовым блоком */
-  border: 2px solid var(--primary-color);
+  border: 5px solid var(--primary-color);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .6s ease-out, transform .6s ease-out;
 }
+
+.cards.visible .card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cards.visible .card:nth-child(1) { transition-delay: .1s; }
+.cards.visible .card:nth-child(2) { transition-delay: .3s; }
+.cards.visible .card:nth-child(3) { transition-delay: .5s; }
+.cards.visible .card:nth-child(4) { transition-delay: .7s; }
 
 /* Блок с иконкой в карточке */
 .card-icon {
@@ -432,13 +465,13 @@ body {
 }
 
 .card-icon img {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 }
 
 /* Заголовок карточки */
 .card-title {
-  font-size: 0.88rem;
+  font-size: 1rem;
   color: var(--white);  /* Тёмно-серый */
   text-align: left;
 }
@@ -447,7 +480,7 @@ body {
 .card-text {
   font-family: 'Open Sans', sans-serif;
   font-weight: 700; /* Обратите внимание, что допустимые значения: 100, 200, 300, 400, и т.д. */
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: var(--light-gray);  /* Чуть более светлый тёмно-серый */
   line-height: 1.2;
   text-align: left;
@@ -457,8 +490,8 @@ body {
 @media (max-width: 768px) {
   .cards {
     gap: 1rem;               /* Расстояние между карточками */
-    margin-top: 10rem;        /* Отступ сверху, чтобы карточки были ниже кнопки */
-    margin-bottom: 0.1rem;
+    width: 97%;
+    margin: 1rem auto 5rem;
   }
   .card {
     gap: 1rem;                        /* Отступ между иконкой и текстовым блоком */
@@ -467,14 +500,103 @@ body {
   .card-text-block {
     text-align: left;     /* Или text-align: center; если требуется */
   }
+  .card-icon img {
+    width: 60px;
+    height: 60px;
+  }
+  .card-text {
+    font-size: 0.7rem;
+  }
+  .card-title {
+    font-size: 0.8rem;
+  }
+}
+
+/* ---------- Блок “Заключение” ---------- */
+.conclusion {
+  width: 97%;
+  margin: 6rem auto 4rem;          /* отступы сверху/снизу */
+  background: var(--primary-color);             /* ярко-лаймовый фон (из скрина) */
+  border-radius: 30px;
+  border: 5px solid var(--primary-color);
+  padding: 3rem 2rem;
+  overflow: hidden;
+}
+
+.conclusion-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.conclusion-text {
+  flex: 1 1 380px;
+  text-align: center;
+}
+
+.conclusion-text h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--white);                    /* чёрный/тёмный текст на лаймовом фоне */
+  margin-bottom: 2rem;
+}
+
+.conclusion-button {
+  display: inline-block;
+  background: var(--white);
+  color: var(--primary-color);
+  padding: 1.25rem 2.5rem;
+  border-radius: 18px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform .2s, filter .2s;
+}
+
+.conclusion-button:hover {
+  transform: translateY(-3px);
+  filter: brightness(90%);
+}
+
+.conclusion-visual {
+  flex: 1 1 360px;
+  display: flex;
+  justify-content: center;
+}
+
+.conclusion-visual img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+}
+
+/* ---------- Адаптивность ---------- */
+@media (max-width: 768px) {
+  .conclusion {
+    padding: 2rem 1.5rem;
+  }
+  .conclusion-content {
+    flex-direction: column;
+  }
+  .conclusion-text h2 {
+    font-size: 1.6rem;
+  }
+  .conclusion-button {
+    font-size: 0.95rem;
+  }
 }
 
 /* 5. Футер */
 .footer {
-  background-color: var(--white);
-  padding: 1rem;
+  background-color: var(--dark-blue);
   border-top: 0 solid #eaeaea;
   text-align: center;
+  padding: 1rem;
+  border-top: 5px solid var(--primary-color);
+  border-radius: 30px 30px 30px 30px; /* Верхние углы: 0, нижние углы: 20px */
+  overflow: hidden;         /* Чтобы содержимое не выходило за округление */
 }
 
 .footer-content {
@@ -486,24 +608,31 @@ body {
   align-items: center;
 }
 
-.footer-logo-img {
-  width: 100px;
-  height: auto;
-}
-
 .footer-copy {
   flex: 1;
   text-align: center;
   font-size: 1rem;
-  color: var(--dark-gray-text);
+  color: var(--white);
 }
 
 .footer-social {
   display: flex;
-  gap: 1rem;
 }
 
-.footer-social a {
-  text-decoration: none;
-  color: var(--primary-color);
+.footer-logo {
+  width: 70px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;   /* ⬅️  колоночная раскладка  */
+    align-items: center;      /* центрируем по горизонтали */
+    gap: 2rem;                /* расстояние между блоками  */
+  }
+
+  .footer-logo {
+    width: 100px;
+    height: auto;
+  }
 }

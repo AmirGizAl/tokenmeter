@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import CoinLottie from './components/CoinLottie.tsx';
 
@@ -15,6 +15,41 @@ import DisLogo from './assets/dis_logo.svg?react';
 const App: React.FC = () => {
     const [isNavOpen, setIsNavOpen] = useState(false);
     const toggleNav = () => setIsNavOpen((prev) => !prev);
+    const cardsRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (!cardsRef.current) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    // при пересечении 50 % высоты блока добавляем класс visible
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);       // больше не наблюдаем
+                }
+            },
+            { threshold: 0.5 }                         // половина блока во вьюпорте
+        );
+
+        observer.observe(cardsRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+    const aboutRef = useRef<HTMLElement | null>(null);
+
+    useEffect(() => {
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');  // .about → .visible
+                    io.unobserve(entry.target);
+                }
+            },
+            { threshold: 0.5 }                          // половина секции
+        );
+        if (aboutRef.current) io.observe(aboutRef.current);
+        return () => io.disconnect();
+    }, []);
 
     return (
         <div className="app-wrapper">
@@ -26,13 +61,13 @@ const App: React.FC = () => {
                         <span className="project-name">TokenMeter</span>
                     </div>
                     <nav className={`nav-menu ${isNavOpen ? 'open' : ''}`}>
-                        <a href="#" aria-label="Telegram">
+                        <a href="#" target="_blank" aria-label="Telegram">
                             <TgLogo className="nav-icon"/>
                         </a>
-                        <a href="#" aria-label="X">
+                        <a href="#" target="_blank" aria-label="X">
                             <XLogo className="nav-icon"/>
                         </a>
-                        <a href="#" aria-label="Discord">
+                        <a href="#" target="_blank" aria-label="Discord">
                             <DisLogo className="nav-icon"/>
                         </a>
                     </nav>
@@ -96,7 +131,7 @@ const App: React.FC = () => {
                 </div>
             </section>
             {/* Блок "О проекте" */}
-            <section className="about" id="about">
+            <section className="about" id="about" ref={aboutRef}>
                 <div className="about-content">
                     <div className="about-text">
                         <h2>Что такое цифровой квадратный метр?</h2>
@@ -113,7 +148,7 @@ const App: React.FC = () => {
                 </div>
             </section>
             {/* Блок "Карточки" */}
-            <section className="cards">
+            <section className="cards" ref={cardsRef}>
                 <div className="card">
                     <div className="card-icon">
                         <img src={icon_1} alt="Иконка 1"/>
@@ -155,34 +190,47 @@ const App: React.FC = () => {
                     </div>
                 </div>
             </section>
+            {/* ---------- Блок “Заключение” ---------- */}
+            <section className="conclusion" id="conclusion">
+                <div className="conclusion-content">
+                    <div className="conclusion-text">
+                        <h2>
+                            Начните инвестировать <br />
+                            в цифровые квадратные метры <br />
+                            с TokenMeter уже сегодня
+                        </h2>
+
+                        <a
+                            href="https://t.me/your_telegram_handle"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="conclusion-button"
+                        >
+                            Запустить TokenMeter в Telegram
+                        </a>
+                    </div>
+
+                    <div className="conclusion-visual">
+                        <img src={logo} alt="Интерфейс TokenMeter-бота" />
+                    </div>
+                </div>
+            </section>
             {/* Остальные блоки, например, FAQ, контакты и футер – можно добавить по аналогичной схеме */}
             <footer className="footer" id="contacts">
                 <div className="footer-content">
+                    <div className="logo-container">
+                        <img src={logo} alt="TokenMeter Logo" className="footer-logo"/>
+                    </div>
                     <div className="footer-copy">© 2025 TokenMeter</div>
                     <div className="footer-social">
-                        <a href="https://t.me/your_telegram" target="_blank" rel="noopener noreferrer">
-                            {/* Telegram icon */}
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22A2D7" strokeWidth="2"
-                                 strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M21 3L3 10.5l5.5 2.5L17 6l4 3z"></path>
-                                <path d="M13 16l3 3 4-7-9-4.5z"></path>
-                            </svg>
+                        <a href="#" target="_blank" aria-label="Telegram">
+                            <TgLogo className="nav-icon"/>
                         </a>
-                        <a href="https://twitter.com/your_twitter" target="_blank" rel="noopener noreferrer">
-                            {/* Twitter icon */}
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22A2D7" strokeWidth="2"
-                                 strokeLinecap="round" strokeLinejoin="round">
-                                <path
-                                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43 1s-3.76 2.87-6.37 4.17A4.48 4.48 0 0 0 8.3 6.07a12.94 12.94 0 0 1-9.41-4.77 4.48 4.48 0 0 0 1.39 6A4.42 4.42 0 0 1 .64 6.16v.05a4.48 4.48 0 0 0 3.6 4.4 4.48 4.48 0 0 1-2.02.08 4.48 4.48 0 0 0 4.19 3.11A9 9 0 0 1 0 18.57a12.94 12.94 0 0 0 7 2.05c8.33 0 12.88-6.91 12.88-12.88 0-.2 0-.39-.02-.58A9.22 9.22 0 0 0 24 4.59a9.07 9.07 0 0 1-2.6.71z"></path>
-                            </svg>
+                        <a href="#" target="_blank" aria-label="X">
+                            <XLogo className="nav-icon"/>
                         </a>
-                        <a href="https://instagram.com/your_instagram" target="_blank" rel="noopener noreferrer">
-                            {/* Instagram icon */}
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22A2D7" strokeWidth="2"
-                                 strokeLinecap="round" strokeLinejoin="round">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                <path d="M16 11.37a4 4 0 1 1-4.63-4"></path>
-                            </svg>
+                        <a href="#" target="_blank" aria-label="Discord">
+                            <DisLogo className="nav-icon"/>
                         </a>
                     </div>
                 </div>
