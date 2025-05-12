@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import CoinLottie from './components/CoinLottie.tsx';
+import { useTranslation } from 'react-i18next';
 
 import logo from './assets/logo.png';           // Логотип TokenMeter
 import heroBg from './assets/hero_bg.png';        // Фоновое изображение для Hero-блока
@@ -8,6 +9,7 @@ import icon_1 from './assets/icon_coin_1.png';
 import icon_2 from './assets/icon_coin_2.png';
 import icon_3 from './assets/icon_coin_3.png';
 import icon_4 from './assets/icon_coin_4.png';
+import building from './assets/building.png';
 import TgLogo from './assets/tg_logo.svg?react';
 import XLogo from './assets/x_logo.svg?react';
 import DisLogo from './assets/dis_logo.svg?react';
@@ -51,6 +53,12 @@ const App: React.FC = () => {
         return () => io.disconnect();
     }, []);
 
+    const { t, i18n } = useTranslation();
+    const handleLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        i18n.changeLanguage(e.target.value);
+        e.target.blur();                 // ⬅️  снимаем focus – цвет вернётся
+    };
+
     return (
         <div className="app-wrapper">
             {/* Хэдер */}
@@ -61,21 +69,22 @@ const App: React.FC = () => {
                         <span className="project-name">TokenMeter</span>
                     </div>
                     <nav className={`nav-menu ${isNavOpen ? 'open' : ''}`}>
-                        <a href="#" target="_blank" aria-label="Telegram">
-                            <TgLogo className="nav-icon"/>
-                        </a>
-                        <a href="#" target="_blank" aria-label="X">
-                            <XLogo className="nav-icon"/>
-                        </a>
-                        <a href="#" target="_blank" aria-label="Discord">
-                            <DisLogo className="nav-icon"/>
-                        </a>
+                        <a href="#" target="_blank" aria-label="Telegram"><TgLogo className="nav-icon"/></a>
+                        <a href="#" target="_blank" aria-label="X"><XLogo className="nav-icon"/></a>
+                        <a href="#" target="_blank" aria-label="Discord"><DisLogo className="nav-icon"/></a>
+                        <select className="lang-switcher" value={i18n.resolvedLanguage} onChange={handleLangChange}>
+                            <option value="ru">RU</option>
+                            <option value="en">EN</option>
+                        </select>
                     </nav>
                     <div className={`hamburger ${isNavOpen ? "open" : ""}`} onClick={toggleNav}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <span></span><span></span><span></span>
                     </div>
+                    {/* Language switcher */}
+                    {/*<select className="lang-switcher" value={i18n.resolvedLanguage} onChange={handleLangChange}>*/}
+                    {/*    <option value="ru">RU</option>*/}
+                    {/*    <option value="en">EN</option>*/}
+                    {/*</select>*/}
                 </div>
             </header>
             <section
@@ -85,7 +94,7 @@ const App: React.FC = () => {
             >
                 <div className="hero-overlay"></div>
                 <div className="hero-content">
-                    <h1 className="fade-in" data-speed="0.3">Инвестируйте в цифровые квадратные метры</h1>
+                    <h1 className="fade-in" data-speed="0.3">{t('hero.title')}</h1>
                     <a
                         className="cta-button fade-in delay"
                         data-speed="0.3"
@@ -93,7 +102,7 @@ const App: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        Открыть TokenMeter в Телеграм
+                        {t('hero.cta')}
                     </a>
                     {/* Бегущая строка под кнопкой hero */}
                     <div className="news-ticker fade-in" data-speed="0.3">
@@ -106,7 +115,7 @@ const App: React.FC = () => {
                                              strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                                         </svg>
-                                        <span>Приобретайте цифровые метры через Телеграм-бот</span>
+                                        <span>{t('ticker.buy')}</span>
                                     </div>
 
                                     <div className="ticker-item">
@@ -114,7 +123,7 @@ const App: React.FC = () => {
                                              strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                                         </svg>
-                                        <span>Стоимость токенов привязана к реальной недвижимости</span>
+                                        <span>{t('ticker.price')}</span>
                                     </div>
 
                                     <div className="ticker-item">
@@ -122,7 +131,7 @@ const App: React.FC = () => {
                                              strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                                         </svg>
-                                        <span>Получайте прибыль при росте стоимости квадратных метров</span>
+                                        <span>{t('ticker.profit')}</span>
                                     </div>
                                 </React.Fragment>
                             ))}
@@ -134,13 +143,8 @@ const App: React.FC = () => {
             <section className="about" id="about" ref={aboutRef}>
                 <div className="about-content">
                     <div className="about-text">
-                        <h2>Что такое цифровой квадратный метр?</h2>
-                        <p>
-                            Это цифровой финансовый актив или токен, цена которого твердо привязана к стоимости
-                            реального
-                            квадратного метра недвижимости в ведущих городах мира. Стоимость токена меняется вместе с
-                            ценой квадратного метра на каждом этапе строительства проекта.
-                        </p>
+                        <h2>{t('about.title')}</h2>
+                        <p>{t('about.text')}</p>
                     </div>
                     <div className="about-visual">
                         <CoinLottie />
@@ -154,8 +158,8 @@ const App: React.FC = () => {
                         <img src={icon_1} alt="Иконка 1"/>
                     </div>
                     <div className="card-text-block">
-                        <h3 className="card-title">Высокая доходность</h3>
-                        <p className="card-text">Рост цены свыше 35%*</p>
+                        <h3 className="card-title">{t('cards.c1.h')}</h3>
+                        <p className="card-text">{t('cards.c1.p')}</p>
                     </div>
                 </div>
                 <div className="card">
@@ -163,8 +167,8 @@ const App: React.FC = () => {
                         <img src={icon_4} alt="Иконка 2"/>
                     </div>
                     <div className="card-text-block">
-                        <h3 className="card-title">Низкий порог входа</h3>
-                        <p className="card-text">Купите токен на любую сумму</p>
+                        <h3 className="card-title">{t('cards.c2.h')}</h3>
+                        <p className="card-text">{t('cards.c2.p')}</p>
                     </div>
                 </div>
                 <div className="card">
@@ -172,10 +176,8 @@ const App: React.FC = () => {
                         <img src={icon_3} alt="Иконка 3"/>
                     </div>
                     <div className="card-text-block">
-                        <h3 className="card-title">Недвижимость по всему миру</h3>
-                        <p className="card-text">
-                            Покупайте и продавайте цифровые квадратные метры по всему миру
-                        </p>
+                        <h3 className="card-title">{t('cards.c3.h')}</h3>
+                        <p className="card-text">{t('cards.c3.p')}</p>
                     </div>
                 </div>
                 <div className="card">
@@ -183,10 +185,8 @@ const App: React.FC = () => {
                         <img src={icon_2} alt="Иконка 4"/>
                     </div>
                     <div className="card-text-block">
-                        <h3 className="card-title">Доступность покупки</h3>
-                        <p className="card-text">
-                            Не нужно иметь гражданство страны, чтобы инвестировать в ее недвижимость
-                        </p>
+                        <h3 className="card-title">{t('cards.c4.h')}</h3>
+                        <p className="card-text">{t('cards.c4.p')}</p>
                     </div>
                 </div>
             </section>
@@ -194,11 +194,7 @@ const App: React.FC = () => {
             <section className="conclusion" id="conclusion">
                 <div className="conclusion-content">
                     <div className="conclusion-text">
-                        <h2>
-                            Начните инвестировать <br />
-                            в цифровые квадратные метры <br />
-                            с TokenMeter уже сегодня
-                        </h2>
+                        <h2>{t('conclusion.title')}</h2>
 
                         <a
                             href="https://t.me/your_telegram_handle"
@@ -206,12 +202,12 @@ const App: React.FC = () => {
                             rel="noopener noreferrer"
                             className="conclusion-button"
                         >
-                            Запустить TokenMeter в Telegram
+                            {t('conclusion.cta')}
                         </a>
                     </div>
 
                     <div className="conclusion-visual">
-                        <img src={logo} alt="Интерфейс TokenMeter-бота" />
+                        <img src={building} alt="Интерфейс TokenMeter-бота" />
                     </div>
                 </div>
             </section>

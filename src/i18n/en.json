@@ -1,0 +1,25 @@
+{
+  "hero": {
+    "title": "Invest in digital square meters",
+    "cta": "Open TokenMeter in Telegram"
+  },
+  "ticker": {
+    "buy": "Purchase digital square meters through our Telegram app",
+    "price": "Token prices are linked to real estate values",
+    "profit": "Earn profits as the price of square meters increases"
+  },
+  "about": {
+    "title": "What is a digital square meter?",
+    "text": "A digital square meter is a financial asset or token whose value is directly tied to the price of one square meter of real estate in major global cities.\nAs the property project progresses through different construction stages, the token’s value changes in line with real estate price fluctuations."
+  },
+  "cards": {
+    "c1": { "h": "High returns", "p": "Price growth of over 35%" },
+    "c2": { "h": "Low entry threshold", "p": "Buy digital square meters with any amount of money" },
+    "c3": { "h": "Global real estate access", "p": "Buy and sell digital square meters around the world" },
+    "c4": { "h": "Accessible Investment", "p": "No need for citizenship to invest in real estate abroad" }
+  },
+  "conclusion": {
+    "title": "Start investing in digital square meters\nwith TokenMeter today",
+    "cta": "Launch TokenMeter on Telegram"
+  }
+}
