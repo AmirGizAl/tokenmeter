@@ -285,7 +285,7 @@ body {
   }
   .hero-content h1 {
     font-size: 30px;
-    margin: -5rem auto 5rem;
+    /*margin: -5rem auto 5rem;*/
   }
 }
 
@@ -355,7 +355,7 @@ body {
 
 @media (max-width: 768px) {
   .news-ticker {
-    margin: 10rem 0 -5rem;
+    margin: 5rem 0 1rem;
   }
   .ticker-item {
     font-size: 1.1rem;
