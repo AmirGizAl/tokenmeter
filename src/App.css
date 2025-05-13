@@ -129,7 +129,7 @@ body {
   /* Блок навигации позиционируем так же, но теперь строим его в РЯД                */
   .nav-menu {
     position: absolute;
-    top: 8.6%;                 /* остаётся под хэдером */
+    top: 13%;                 /* остаётся под хэдером */
     left: 0;
     width: 100%;
     background: var(--dark-blue);
@@ -636,10 +636,11 @@ body {
     flex-direction: column;
   }
   .conclusion-text h2 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
   .conclusion-button {
-    font-size: 0.95rem;
+    padding: 1rem 1rem;  /* увеличение отступов */
+    font-size: 0.9rem;  /* 2 * базовый размер (1rem) */
   }
 }
 
