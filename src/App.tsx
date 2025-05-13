@@ -69,7 +69,7 @@ const App: React.FC = () => {
                         <span className="project-name">TokenMeter</span>
                     </div>
                     <nav className={`nav-menu ${isNavOpen ? 'open' : ''}`}>
-                        <a href="#" target="_blank" aria-label="Telegram"><TgLogo className="nav-icon"/></a>
+                        <a href="https://t.me/token_meter" target="_blank" aria-label="Telegram"><TgLogo className="nav-icon"/></a>
                         <a href="#" target="_blank" aria-label="X"><XLogo className="nav-icon"/></a>
                         <a href="#" target="_blank" aria-label="Discord"><DisLogo className="nav-icon"/></a>
                         <select className="lang-switcher" value={i18n.resolvedLanguage} onChange={handleLangChange}>
@@ -80,11 +80,6 @@ const App: React.FC = () => {
                     <div className={`hamburger ${isNavOpen ? "open" : ""}`} onClick={toggleNav}>
                         <span></span><span></span><span></span>
                     </div>
-                    {/* Language switcher */}
-                    {/*<select className="lang-switcher" value={i18n.resolvedLanguage} onChange={handleLangChange}>*/}
-                    {/*    <option value="ru">RU</option>*/}
-                    {/*    <option value="en">EN</option>*/}
-                    {/*</select>*/}
                 </div>
             </header>
             <section
@@ -98,7 +93,7 @@ const App: React.FC = () => {
                     <a
                         className="cta-button fade-in delay"
                         data-speed="0.3"
-                        href="https://t.me/your_telegram_handle"
+                        href="https://t.me/token_meter"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
@@ -197,7 +192,7 @@ const App: React.FC = () => {
                         <h2>{t('conclusion.title')}</h2>
 
                         <a
-                            href="https://t.me/your_telegram_handle"
+                            href="https://t.me/token_meter"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="conclusion-button"
@@ -219,7 +214,7 @@ const App: React.FC = () => {
                     </div>
                     <div className="footer-copy">© 2025 TokenMeter</div>
                     <div className="footer-social">
-                        <a href="#" target="_blank" aria-label="Telegram">
+                        <a href="https://t.me/token_meter" target="_blank" aria-label="Telegram">
                             <TgLogo className="nav-icon"/>
                         </a>
                         <a href="#" target="_blank" aria-label="X">
