@@ -691,4 +691,7 @@ body {
     width: 100px;
     height: auto;
   }
+  .footer-social {
+    gap: 3rem;
+  }
 }
